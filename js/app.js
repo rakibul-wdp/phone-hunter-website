@@ -1,3 +1,11 @@
+// error function
+const getError = (displayStyle) => {
+  document.getElementById('guide-message').style.display = displayStyle;
+};
+// more-button function
+const getMoreBtn = (displayStyle) => {
+  document.getElementById('show-more').style.display = displayStyle;
+};
 // get value form search box
 const searchPhone = () => {
   const searchBox = document.getElementById('search-box');
@@ -5,10 +13,10 @@ const searchPhone = () => {
   // clear search box
   searchBox.value = '';
   if (searchText == '') {
-    const getError = document.getElementById('guide-message');
-    getError.style.display = 'block';
+    getError('block');
     const searchResult = document.getElementById('search-result');
     searchResult.textContent = '';
+    getMoreBtn('none');
   } else {
     // get data
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
@@ -19,12 +27,11 @@ const searchPhone = () => {
 };
 // display search result
 const displaySearchResult = (phones) => {
-  console.log(phones);
   const searchResult = document.getElementById('search-result');
   searchResult.textContent = '';
   if (phones.length == 0) {
-    const getError = document.getElementById('guide-message');
-    getError.style.display = 'block';
+    getError('block');
+    getMoreBtn('none');
   } else {
     if (phones.length > 20 && phones.splice(20, phones.length)) {
       phones.forEach((phone) => {
@@ -42,8 +49,7 @@ const displaySearchResult = (phones) => {
         `;
         searchResult.appendChild(createDiv);
       });
-      const getMoreBtn = document.getElementById('show-more');
-      getMoreBtn.style.display = 'block';
+      getMoreBtn('block');
     } else {
       phones.forEach((phone) => {
         const createDiv = document.createElement('div');
@@ -60,11 +66,9 @@ const displaySearchResult = (phones) => {
         `;
         searchResult.appendChild(createDiv);
       });
-      const getMoreBtn = document.getElementById('show-more');
-      getMoreBtn.style.display = 'none';
+      getMoreBtn('none');
     }
-    const getError = document.getElementById('guide-message');
-    getError.style.display = 'none';
+    getError('none');
   }
 };
 // get single phone details data
