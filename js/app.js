@@ -4,20 +4,31 @@ const searchPhone = () => {
   const searchText = searchBox.value;
   // clear search box
   searchBox.value = '';
-  // get data
-  const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
-  fetch(url)
-    .then((res) => res.json())
-    .then((data) => displaySearchResult(data.data));
+  if (searchText == '') {
+    const getError = document.getElementById('guide-message');
+    getError.style.display = 'block';
+    const searchResult = document.getElementById('search-result');
+    searchResult.textContent = '';
+  } else {
+    // get data
+    const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => displaySearchResult(data.data));
+  }
 };
 
 const displaySearchResult = (phones) => {
   const searchResult = document.getElementById('search-result');
   searchResult.textContent = '';
-  phones.forEach((phone) => {
-    const createDiv = document.createElement('div');
-    createDiv.classList.add('col');
-    createDiv.innerHTML = `
+  if (phones.length == 0) {
+    const getError = document.getElementById('guide-message');
+    getError.style.display = 'block';
+  } else {
+    phones.forEach((phone) => {
+      const createDiv = document.createElement('div');
+      createDiv.classList.add('col');
+      createDiv.innerHTML = `
       <div class="card w-50 h-50">
         <img src="${phone.image}" class="card-img-top img-fluid" alt="...">
         <div class="card-body text-center">
@@ -27,8 +38,11 @@ const displaySearchResult = (phones) => {
         </div>
       </div>
     `;
-    searchResult.appendChild(createDiv);
-  });
+      searchResult.appendChild(createDiv);
+    });
+    const getError = document.getElementById('guide-message');
+    getError.style.display = 'none';
+  }
 };
 
 const loadPhoneDetails = (phoneSlug) => {
