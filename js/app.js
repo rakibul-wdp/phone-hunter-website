@@ -17,41 +17,64 @@ const searchPhone = () => {
       .then((data) => displaySearchResult(data.data));
   }
 };
-
+// display search result
 const displaySearchResult = (phones) => {
+  console.log(phones);
   const searchResult = document.getElementById('search-result');
   searchResult.textContent = '';
   if (phones.length == 0) {
     const getError = document.getElementById('guide-message');
     getError.style.display = 'block';
   } else {
-    phones.forEach((phone) => {
-      const createDiv = document.createElement('div');
-      createDiv.classList.add('col');
-      createDiv.innerHTML = `
-      <div class="card w-50 h-50">
-        <img src="${phone.image}" class="card-img-top img-fluid" alt="...">
-        <div class="card-body text-center">
-          <h5 class="card-title">${phone.phone_name}</h5>
-          <p class="card-text fw-bold">${phone.brand}</p>
-          <button onclick="loadPhoneDetails('${phone.slug}')" type="button" class="btn btn-info rounded-pill">Details</button>
-        </div>
-      </div>
-    `;
-      searchResult.appendChild(createDiv);
-    });
+    if (phones.length > 20 && phones.splice(20, phones.length)) {
+      phones.forEach((phone) => {
+        const createDiv = document.createElement('div');
+        createDiv.classList.add('col');
+        createDiv.innerHTML = `
+          <div class="card w-50 h-50">
+            <img src="${phone.image}" class="card-img-top img-fluid" alt="...">
+            <div class="card-body text-center">
+              <h5 class="card-title">${phone.phone_name}</h5>
+              <p class="card-text fw-bold">${phone.brand}</p>
+              <button onclick="loadPhoneDetails('${phone.slug}')" type="button" class="btn btn-info rounded-pill">Details</button>
+            </div>
+          </div>
+        `;
+        searchResult.appendChild(createDiv);
+      });
+      const getMoreBtn = document.getElementById('show-more');
+      getMoreBtn.style.display = 'block';
+    } else {
+      phones.forEach((phone) => {
+        const createDiv = document.createElement('div');
+        createDiv.classList.add('col');
+        createDiv.innerHTML = `
+          <div class="card w-50 h-50">
+            <img src="${phone.image}" class="card-img-top img-fluid" alt="...">
+            <div class="card-body text-center">
+              <h5 class="card-title">${phone.phone_name}</h5>
+              <p class="card-text fw-bold">${phone.brand}</p>
+              <button onclick="loadPhoneDetails('${phone.slug}')" type="button" class="btn btn-info rounded-pill">Details</button>
+            </div>
+          </div>
+        `;
+        searchResult.appendChild(createDiv);
+      });
+      const getMoreBtn = document.getElementById('show-more');
+      getMoreBtn.style.display = 'none';
+    }
     const getError = document.getElementById('guide-message');
     getError.style.display = 'none';
   }
 };
-
+// get single phone details data
 const loadPhoneDetails = (phoneSlug) => {
   const url = `https://openapi.programming-hero.com/api/phone/${phoneSlug}`;
   fetch(url)
     .then((res) => res.json())
     .then((data) => displayPhoneDetails(data.data));
 };
-
+// display single phone details
 const displayPhoneDetails = (phoneDetails) => {
   console.log(phoneDetails);
   const phoneDetail = document.getElementById('phone-details');
