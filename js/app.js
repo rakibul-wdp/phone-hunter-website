@@ -6,6 +6,10 @@ const getError = (displayStyle) => {
 const getMoreBtn = (displayStyle) => {
   document.getElementById('show-more').style.display = displayStyle;
 };
+// phone details function
+const singlePhone = (displayStyle) => {
+  document.getElementById('phone-details').style.display = displayStyle;
+};
 // get value form search box
 const searchPhone = () => {
   const searchBox = document.getElementById('search-box');
@@ -17,6 +21,7 @@ const searchPhone = () => {
     const searchResult = document.getElementById('search-result');
     searchResult.textContent = '';
     getMoreBtn('none');
+    singlePhone('none');
   } else {
     // get data
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
@@ -32,6 +37,7 @@ const displaySearchResult = (phones) => {
   if (phones.length == 0) {
     getError('block');
     getMoreBtn('none');
+    singlePhone('none');
   } else {
     if (phones.length > 20 && phones.splice(20, phones.length)) {
       phones.forEach((phone) => {
@@ -85,16 +91,50 @@ const displayPhoneDetails = (phoneDetails) => {
   phoneDetail.textContent = '';
   const createDiv = document.createElement('div');
   createDiv.classList.add('card');
+  createDiv.classList.add('phone-details');
   createDiv.innerHTML = `
-    <img src="${phoneDetail.image}" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">${phoneDetail.name}</h5>
-      <p class="card-text">${phoneDetail.brand}</p>
+    <img src="${phoneDetails.image}" class="card-img-top img-fluid" alt="...">
+    <div class="card-body text-center">
+      <h5 class="card-title custom-color">${phoneDetails.name}</h5>
+      <p class="card-text fw-bold custom-color">${phoneDetails.brand}</p>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">Release Date: ${phoneDetail.releaseDate}</li>
-      <li class="list-group-item">Chipset: </li>
-      <li class="list-group-item">A third item</li>
+      <li class="list-group-item"><span class="fw-bold custom-color">Release Date:</span> ${
+        phoneDetails.releaseDate
+          ? phoneDetails.releaseDate
+          : '<span class="text-danger">No Release Date Found yet</span>'
+      }</li>
+      <li class="list-group-item text-center fs-5 fw-bold custom-color"><span>Main Feature</span></li>
+      <li class="list-group-item"><span class="fw-bold custom-color">Chipset:</span> ${
+        phoneDetails.mainFeatures.chipSet
+      }</li>
+      <li class="list-group-item"><span class="fw-bold custom-color">Memory:</span> ${
+        phoneDetails.mainFeatures.memory
+      }</li>
+      <li class="list-group-item"><span class="fw-bold custom-color">Storage:</span> ${
+        phoneDetails.mainFeatures.storage
+      }</li>
+      <li class="list-group-item"><span class="fw-bold custom-color">Display Size:</span> ${
+        phoneDetails.mainFeatures.displaySize
+      }</li>
+      <li class="list-group-item text-center fs-5 fw-bold custom-color"><span>Sensors</span></li>
+      <li class="list-group-item sensors">
+        <span>${phoneDetails.mainFeatures.sensors[0]}</span>
+        <span>${phoneDetails.mainFeatures.sensors[1]}</span>
+        <span>${phoneDetails.mainFeatures.sensors[2]}</span>
+        <span>${phoneDetails.mainFeatures.sensors[3]}</span>
+        <span>${phoneDetails.mainFeatures.sensors[4]}</span>
+        <span>${phoneDetails.mainFeatures.sensors[5]}</span>
+      </li>
+      <li class="list-group-item text-center fs-5 fw-bold custom-color"><span>Others</span></li>
+      <li class="list-group-item"><span class="fw-bold custom-color">Memory:</span> ${
+        phoneDetails.others?.Bluetooth
+      }</li>
+      <li class="list-group-item"><span class="fw-bold custom-color">Memory:</span> ${phoneDetails.others?.GPS}</li>
+      <li class="list-group-item"><span class="fw-bold custom-color">Memory:</span> ${phoneDetails.others?.NFC}</li>
+      <li class="list-group-item"><span class="fw-bold custom-color">Memory:</span> ${phoneDetails.others?.Radio}</li>
+      <li class="list-group-item"><span class="fw-bold custom-color">Memory:</span> ${phoneDetails.others?.USB}</li>
+      <li class="list-group-item"><span class="fw-bold custom-color">Memory:</span> ${phoneDetails.others?.WLAN}</li>
     </ul>
   `;
   phoneDetail.appendChild(createDiv);

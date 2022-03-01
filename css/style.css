@@ -4,3 +4,14 @@
 #show-more {
   display: none;
 }
+.sensors {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.custom-color {
+  color: #3b3c36;
+}
+.phone-details {
+  width: 60%;
+  margin: auto;
+}
