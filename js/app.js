@@ -10,10 +10,21 @@ const getMoreBtn = (displayStyle) => {
 const singlePhone = (displayStyle) => {
   document.getElementById('phone-details').style.display = displayStyle;
 };
+// spinner function
+const toggleSpinner = (displayStyle) => {
+  document.getElementById('spinner').style.display = displayStyle;
+};
+// search result hidden and show function
+const toggleSearchResult = (displayStyle) => {
+  document.getElementById('search-result').style.visibility = displayStyle;
+};
 // get value form search box
 const searchPhone = () => {
   const searchBox = document.getElementById('search-box');
   const searchText = searchBox.value;
+  // show spinner
+  toggleSpinner('block');
+  toggleSearchResult('hidden');
   // clear search box
   searchBox.value = '';
   if (searchText == '') {
@@ -22,6 +33,7 @@ const searchPhone = () => {
     searchResult.textContent = '';
     getMoreBtn('none');
     singlePhone('none');
+    toggleSpinner('none');
   } else {
     // get data
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
@@ -83,6 +95,8 @@ const displaySearchResult = (phones) => {
     getError('none');
     singlePhone('block');
   }
+  toggleSpinner('none');
+  toggleSearchResult('visible');
 };
 // get single phone details data
 const loadPhoneDetails = (phoneSlug) => {
