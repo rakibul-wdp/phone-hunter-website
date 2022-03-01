@@ -36,6 +36,8 @@ const displaySearchResult = (phones) => {
   searchResult.textContent = '';
   if (phones.length == 0) {
     getError('block');
+    const searchResult = document.getElementById('search-result');
+    searchResult.textContent = '';
     getMoreBtn('none');
     singlePhone('none');
   } else {
@@ -53,6 +55,8 @@ const displaySearchResult = (phones) => {
             </div>
           </div>
         `;
+        const phoneDetail = document.getElementById('phone-details');
+        phoneDetail.textContent = '';
         searchResult.appendChild(createDiv);
       });
       getMoreBtn('block');
@@ -70,11 +74,14 @@ const displaySearchResult = (phones) => {
             </div>
           </div>
         `;
+        const phoneDetail = document.getElementById('phone-details');
+        phoneDetail.textContent = '';
         searchResult.appendChild(createDiv);
       });
       getMoreBtn('none');
     }
     getError('none');
+    singlePhone('block');
   }
 };
 // get single phone details data
