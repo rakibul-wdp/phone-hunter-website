@@ -14,7 +14,47 @@
 .phone-details {
   width: 60%;
   margin: auto;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
 #spinner {
   display: none;
+}
+.card-shadow {
+  background-color: gray;
+}
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .search-result {
+    margin-left: 60px;
+  }
+  .phone-detail {
+    width: 100%;
+  }
+}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .search-result {
+    margin-left: 60px;
+  }
+  .phone-detail {
+    width: 100%;
+  }
+}
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .search-result {
+    margin-left: 100px;
+  }
+  .phone-details {
+    width: 35%;
+  }
+}
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .search-result {
+    margin-left: 120px;
+  }
+  .phone-details {
+    width: 35%;
+  }
 }

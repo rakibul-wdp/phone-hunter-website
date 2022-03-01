@@ -56,9 +56,9 @@ const displaySearchResult = (phones) => {
     if (phones.length > 20 && phones.splice(20, phones.length)) {
       phones.forEach((phone) => {
         const createDiv = document.createElement('div');
-        createDiv.classList.add('col');
+        createDiv.classList.add('col', 'rounded');
         createDiv.innerHTML = `
-          <div class="card w-50 h-50">
+          <div class="card w-75 h-75">
             <img src="${phone.image}" class="card-img-top img-fluid" alt="...">
             <div class="card-body text-center">
               <h5 class="card-title">${phone.phone_name}</h5>
@@ -75,9 +75,9 @@ const displaySearchResult = (phones) => {
     } else {
       phones.forEach((phone) => {
         const createDiv = document.createElement('div');
-        createDiv.classList.add('col');
+        createDiv.classList.add('col', 'rounded');
         createDiv.innerHTML = `
-          <div class="card w-50 h-50">
+          <div class="card w-75 h-75">
             <img src="${phone.image}" class="card-img-top img-fluid" alt="...">
             <div class="card-body text-center">
               <h5 class="card-title">${phone.phone_name}</h5>
@@ -111,8 +111,7 @@ const displayPhoneDetails = (phoneDetails) => {
   const phoneDetail = document.getElementById('phone-details');
   phoneDetail.textContent = '';
   const createDiv = document.createElement('div');
-  createDiv.classList.add('card');
-  createDiv.classList.add('phone-details');
+  createDiv.classList.add('card', 'phone-details');
   createDiv.innerHTML = `
     <img src="${phoneDetails.image}" class="card-img-top img-fluid" alt="...">
     <div class="card-body text-center">
@@ -148,14 +147,14 @@ const displayPhoneDetails = (phoneDetails) => {
         <span>${phoneDetails.mainFeatures.sensors[5]}</span>
       </li>
       <li class="list-group-item text-center fs-5 fw-bold custom-color"><span>Others</span></li>
-      <li class="list-group-item"><span class="fw-bold custom-color">Memory:</span> ${
+      <li class="list-group-item"><span class="fw-bold custom-color">Bluetooth:</span> ${
         phoneDetails.others?.Bluetooth
       }</li>
-      <li class="list-group-item"><span class="fw-bold custom-color">Memory:</span> ${phoneDetails.others?.GPS}</li>
-      <li class="list-group-item"><span class="fw-bold custom-color">Memory:</span> ${phoneDetails.others?.NFC}</li>
-      <li class="list-group-item"><span class="fw-bold custom-color">Memory:</span> ${phoneDetails.others?.Radio}</li>
-      <li class="list-group-item"><span class="fw-bold custom-color">Memory:</span> ${phoneDetails.others?.USB}</li>
-      <li class="list-group-item"><span class="fw-bold custom-color">Memory:</span> ${phoneDetails.others?.WLAN}</li>
+      <li class="list-group-item"><span class="fw-bold custom-color">GPS:</span> ${phoneDetails.others?.GPS}</li>
+      <li class="list-group-item"><span class="fw-bold custom-color">NFC:</span> ${phoneDetails.others?.NFC}</li>
+      <li class="list-group-item"><span class="fw-bold custom-color">Radio:</span> ${phoneDetails.others?.Radio}</li>
+      <li class="list-group-item"><span class="fw-bold custom-color">USB:</span> ${phoneDetails.others?.USB}</li>
+      <li class="list-group-item"><span class="fw-bold custom-color">WLAN:</span> ${phoneDetails.others?.WLAN}</li>
     </ul>
   `;
   phoneDetail.appendChild(createDiv);
